@@ -3,7 +3,7 @@ import Login from "./pages/Login"
 function App() {
 
   return (
-    <main className="">
+    <main className="h-svh">
       <Login></Login>
     </main>
   )

@@ -1,8 +1,10 @@
+import Login from "./pages/Login"
+
 function App() {
 
   return (
     <main className="">
-      <h1>asd</h1>
+      <Login></Login>
     </main>
   )
 }

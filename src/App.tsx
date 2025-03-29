@@ -1,12 +1,8 @@
-import Login from "./pages/Login"
+import AppRoutes from "./router/AppRoutes"
 
 function App() {
 
-  return (
-    <main className="h-svh">
-      <Login></Login>
-    </main>
-  )
+  return <AppRoutes />;
 }
 
 export default App

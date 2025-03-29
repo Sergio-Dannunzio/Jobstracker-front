@@ -33,7 +33,7 @@ export default function Login() {
     };
 
     return (
-        <section className="flex flex-col items-center justify-center h-full bg-cover"
+        <section className="flex flex-col items-center justify-center h-lvh bg-cover"
                 style={{ backgroundImage: `url(${bck})`}}
         >
             <div className="w-fit border-2 p-12 backdrop-blur-sm rounded-2xl items-center flex flex-col">
@@ -48,7 +48,7 @@ export default function Login() {
                         ref={userRef}
                         value={user}
                         onChange={(e) => setUser(e.target.value)}
-                        className="border p-2 rounded mb-4"
+                        className="border p-2 rounded mb-4 backdrop-blur-md"
                         required
                         />
 
@@ -58,7 +58,7 @@ export default function Login() {
                         id="password"
                         value={pwd}
                         onChange={(e) => setPwd(e.target.value)}
-                        className="border p-2 rounded mb-4"
+                        className="border p-2 rounded mb-4 backdrop-blur-md"
                         required
                         />
 

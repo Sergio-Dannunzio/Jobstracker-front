@@ -40,7 +40,7 @@ export default function Login() {
                 {errMsg && <p ref={errRef} className="text-red-500">{errMsg}</p>}
                 <h1 className="text-2xl mb-6">Login</h1>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-80">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-fit sm:w-80">
                     <label htmlFor="email">Email</label>
                     <input
                         type="text"

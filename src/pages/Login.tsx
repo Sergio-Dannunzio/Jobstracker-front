@@ -23,13 +23,29 @@ export default function Login() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
-        axios.post("http://localhost:8000/api/login", 
-            { email: user, password: pwd }, {
-            headers: { "Content-Type": "application/json" },
-            withCredentials: true // Importante si usas sesiones o autenticación
-        })
-        .then(response => console.log(response.data))
-        .catch(error => console.error("Error:", error));
+        try {
+            const response = await axios.post("http://localhost:8000/api/login", 
+                { email: user, password: pwd }, 
+                {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: true // Importante si usa cookies/sesiones
+                }
+            );
+
+            console.log("Respuesta del servidor:", response.data);
+
+            // Guarda el token en localStorage
+            localStorage.setItem("token", response.data.token);
+
+            alert("Login exitoso");
+
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error("Error en el login:", error.message);
+            } else {
+                console.error("Error desconocido:", error);
+            }
+        }
     };
 
     return (

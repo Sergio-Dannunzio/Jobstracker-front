@@ -7,6 +7,7 @@ import {
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import PrivateRoute from "./PrivateRoute";
+import Register from "../pages/Register";
 //import Register from "../pages/Register";
 
 
@@ -38,6 +39,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<Home />} />
         </Route>

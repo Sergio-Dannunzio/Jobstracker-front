@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import bck from "../assets/pexels-quang-nguyen-vinh-222549-2649403.jpg"
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
     const userRef = useRef<HTMLInputElement | null>(null);
     const errRef = useRef<HTMLParagraphElement | null>(null);
+    const navigate = useNavigate();
 
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
@@ -36,8 +38,7 @@ export default function Login() {
 
             // Guarda el token en localStorage
             localStorage.setItem("token", response.data.token);
-
-            alert("Login exitoso");
+            navigate("/home");
 
         } catch (error: unknown) {
             if (error instanceof Error) {

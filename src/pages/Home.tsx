@@ -1,6 +1,21 @@
 import JobCard from "../components/JobCard";
+import axios from "axios";
 
 export default function Home() {
+
+    const getPosts = async () => {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:8000/api/jobs", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        console.log(response.data)
+    }
+
+    getPosts()
+
     return(    
         <div>
             <div className="p-6 mb-2">

@@ -1,20 +1,30 @@
+import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import axios from "axios";
+import { Post } from "../types/Post";
 
 export default function Home() {
 
-    const getPosts = async () => {
-        const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:8000/api/jobs", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    const [posts, setPosts] = useState<Post[]>([]);
 
-        console.log(response.data)
-    }
+    useEffect(() => {
+        const getPosts = async () => {
+            const token = localStorage.getItem("token");
+            try {
+                const response = await axios.get("http://localhost:8000/api/jobs", {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setPosts(response.data);
+                console.log(response.data)
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            }
+        };
 
-    getPosts()
+        getPosts();
+    }, []);
 
     return(    
         <div>
@@ -26,6 +36,11 @@ export default function Home() {
                 <h2 className="text-xl">Con respuesta</h2>
                 <h2 className="text-xl">Rechazados</h2>
             </div>
+            {posts.map((post) =>(
+                <li key={post._id.$oid}>{post.name}</li>
+            ))
+
+            }
             <div className="p-4 px-10">
                 <JobCard></JobCard>
                 <JobCard></JobCard>

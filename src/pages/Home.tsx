@@ -48,47 +48,49 @@ export default function Home() {
                     {theme === "dark" ? "☀️" : "🌙"}
                 </Button>
             </div>
+            <div className="flex justify-end p-4 px-6">
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="outline">Crear nuevo</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>Share link</DialogTitle>
+                        <DialogDescription>
+                            Anyone who has this link will be able to view this.
+                        </DialogDescription>
+                    </DialogHeader>
+                        <div className="flex items-center space-x-2">
+                            <div className="grid flex-1 gap-2">
+                                <Label htmlFor="link" className="sr-only">
+                                Link
+                                </Label>
+                                <Input
+                                id="link"
+                                defaultValue="https://ui.shadcn.com/docs/installation"
+                                readOnly
+                                />
+                            </div>
+                            <Button type="submit" size="sm" className="px-3">
+                                <span className="sr-only">Copy</span>
+                                <Copy />
+                            </Button>
+                        </div>
+                        <DialogFooter className="sm:justify-start">
+                            <DialogClose asChild>
+                                <Button type="button" variant="secondary">
+                                Close
+                                </Button>
+                            </DialogClose>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
+            </div>
             <div className="flex justify-between px-8">
                 <h2 className="text-xl">Sin respuesta</h2>
                 <h2 className="text-xl">Con respuesta</h2>
                 <h2 className="text-xl">Rechazados</h2>
             </div>
-            <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Share</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="flex items-center space-x-2">
-          <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
-              Link
-            </Label>
-            <Input
-              id="link"
-              defaultValue="https://ui.shadcn.com/docs/installation"
-              readOnly
-            />
-          </div>
-          <Button type="submit" size="sm" className="px-3">
-            <span className="sr-only">Copy</span>
-            <Copy />
-          </Button>
-        </div>
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-        </Dialog>
             <div className="p-4 px-10">
                 {posts.map((post) =>(
                     <div key={post._id.$oid}>

@@ -36,16 +36,12 @@ export default function Home() {
                 <h2 className="text-xl">Con respuesta</h2>
                 <h2 className="text-xl">Rechazados</h2>
             </div>
-            {posts.map((post) =>(
-                <li key={post._id.$oid}>{post.name}</li>
-            ))
-
-            }
             <div className="p-4 px-10">
-                <JobCard></JobCard>
-                <JobCard></JobCard>
-                <JobCard></JobCard>
-                <JobCard></JobCard>
+                {posts.map((post) =>(
+                    <div key={post._id.$oid}>
+                        <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                    </div>
+                ))}
             </div>
         </div>
     )

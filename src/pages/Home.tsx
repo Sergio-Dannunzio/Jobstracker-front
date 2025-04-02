@@ -9,8 +9,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 
 export default function Home() {
-
+    const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [posts, setPosts] = useState<Post[]>([]);
+
+    useEffect(() => {
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+        localStorage.setItem("theme", theme);
+      }, [theme]);
 
     useEffect(() => {
         const getPosts = async () => {
@@ -33,6 +42,11 @@ export default function Home() {
 
     return(    
         <div>
+            <div>
+                <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                    {theme === "dark" ? "☀️ Modo Claro" : "🌙 Modo Oscuro"}
+                </Button>
+            </div>
             <div className="p-6 mb-2">
                 <h1 className="text-3xl">Trabajos</h1>
             </div>

@@ -2,11 +2,17 @@ import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import axios from "axios";
 import { Post } from "../types/Post";
-import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogHeader, DialogFooter, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Copy } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
 
 export default function Home() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -54,32 +60,49 @@ export default function Home() {
                         <Button variant="outline">Crear nuevo</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-md">
-                    <DialogHeader>
-                        <DialogTitle>Share link</DialogTitle>
-                        <DialogDescription>
-                            Anyone who has this link will be able to view this.
-                        </DialogDescription>
-                    </DialogHeader>
+                        <DialogHeader>
+                            <DialogTitle>Titulo del trabajo</DialogTitle>
+                        </DialogHeader>
                         <div className="flex items-center space-x-2">
                             <div className="grid flex-1 gap-2">
                                 <Label htmlFor="link" className="sr-only">
-                                Link
+                                Titulo
                                 </Label>
                                 <Input
                                 id="link"
-                                defaultValue="https://ui.shadcn.com/docs/installation"
-                                readOnly
+                                defaultValue="Titulo"        
                                 />
                             </div>
-                            <Button type="submit" size="sm" className="px-3">
-                                <span className="sr-only">Copy</span>
-                                <Copy />
-                            </Button>
                         </div>
+                        <DialogHeader>
+                            <DialogTitle>Descripcion</DialogTitle>
+                        </DialogHeader>
+                        <div className="flex items-center space-x-2">
+                            <div className="grid flex-1 gap-2">
+                                <Label htmlFor="link" className="sr-only">
+                                Titulo
+                                </Label>
+                                <Input
+                                id="link"
+                                defaultValue="Titulo"        
+                                />
+                            </div>
+                        </div>
+                        <Label htmlFor="framework">Estado</Label>
+                        <Select>
+                            <SelectTrigger id="framework">
+                            <SelectValue placeholder="Select" />
+                            </SelectTrigger>
+                            <SelectContent position="popper">
+                            <SelectItem value="enviado">Enviado</SelectItem>
+                            <SelectItem value="respondido">Respondido</SelectItem>
+                            <SelectItem value="rechazado">Rechazado</SelectItem>
+                            </SelectContent>
+                        </Select>
                         <DialogFooter className="sm:justify-start">
                             <DialogClose asChild>
-                                <Button type="button" variant="secondary">
-                                Close
+                                <Button type="button" variant="create">
+                                Crear
                                 </Button>
                             </DialogClose>
                         </DialogFooter>

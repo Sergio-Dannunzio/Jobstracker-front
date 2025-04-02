@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import axios from "axios";
 import { Post } from "../types/Post";
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
 export default function Home() {
 
@@ -36,6 +37,13 @@ export default function Home() {
                 <h2 className="text-xl">Con respuesta</h2>
                 <h2 className="text-xl">Rechazados</h2>
             </div>
+            <Dialog>
+            <DialogTrigger className="bg-blue-500 text-white px-4 py-2 rounded">Abrir Modal</DialogTrigger>
+            <DialogContent>
+                <DialogTitle>Ejemplo de Modal</DialogTitle>
+                <DialogDescription>Este es un modal utilizando shadcn/ui.</DialogDescription>
+            </DialogContent>
+            </Dialog>
             <div className="p-4 px-10">
                 {posts.map((post) =>(
                     <div key={post._id.$oid}>

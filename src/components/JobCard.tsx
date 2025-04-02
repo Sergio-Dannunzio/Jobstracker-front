@@ -1,14 +1,14 @@
 import { FaComment } from "react-icons/fa";
 
-export default function JobCard() {
+export default function JobCard(name: string, status: string, desc: string) {
     return(
         <div className="flex flex-col bg-[#ffffffbf] max-w-72 rounded-2xl p-4 my-2">
             <div className="mb-2 border-b-2 border-[#b978ff9d] flex justify-between items-center pb-1">
-                <h1 className="text-lg">Title</h1>
-                <h2 className="px-2 text-sm text-center text-green-700 bg-green-300 rounded-3xl">Status</h2>
+                <h1 className="text-lg">{name}</h1>
+                <h2 className="px-2 text-sm text-center text-green-700 bg-green-300 rounded-3xl">{status}</h2>
             </div>
             <div className="mb-2">
-                <p>Description Lorem ipsum dolor sit amet consectetur, adipisicing elit. Unde suscipit rerum blanditiis ad, doloribus eius sit commodi eos nulla inventore aliquam, quis, est labore mollitia aperiam asperiores consequuntur quas dolores?</p>
+                <p>{desc}</p>
             </div>
             <div className="flex">
                 <p>02/11</p>

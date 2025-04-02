@@ -1,12 +1,7 @@
 import { FaComment } from "react-icons/fa";
+import { Job } from "../types/Job";
 
-interface JobCardProps {
-    name: string;
-    status: string;
-    desc: string;
-}
-
-const JobCard: React.FC<JobCardProps> = ({ name, status, desc }) => {
+const JobCard: React.FC<Job> = ({ name, status, desc }) => {
     return(
         <div className="flex flex-col bg-[#ffffffbf] max-w-72 rounded-2xl p-4 my-2">
             <div className="mb-2 border-b-2 border-[#b978ff9d] flex justify-between items-center pb-1">

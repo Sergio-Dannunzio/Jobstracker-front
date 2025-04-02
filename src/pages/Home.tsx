@@ -69,7 +69,6 @@ export default function Home() {
                                 Titulo
                                 </Label>
                                 <Input
-                                id="link"
                                 defaultValue="Titulo"        
                                 />
                             </div>
@@ -80,11 +79,10 @@ export default function Home() {
                         <div className="flex items-center space-x-2">
                             <div className="grid flex-1 gap-2">
                                 <Label htmlFor="link" className="sr-only">
-                                Titulo
+                                Descripcion
                                 </Label>
                                 <Input
-                                id="link"
-                                defaultValue="Titulo"        
+                                defaultValue="Descripcion"        
                                 />
                             </div>
                         </div>

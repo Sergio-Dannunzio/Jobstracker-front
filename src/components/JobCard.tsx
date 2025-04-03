@@ -6,7 +6,7 @@ const JobCard: React.FC<Job> = ({ name, status, desc }) => {
     return(
         <Card>
             <CardHeader>
-                <CardTitle className="flex justify-between">{name} <h2 className="px-2 text-sm text-center text-green-700 bg-green-300 rounded-3xl">{status}</h2></CardTitle>
+                <CardTitle className="flex justify-between">{name} <h2 className="px-2 text-sm text-center text-green-700 bg-green-300 rounded-3xl h-fit">{status}</h2></CardTitle>
             </CardHeader>
             <CardContent>
                 <p>{desc}</p>

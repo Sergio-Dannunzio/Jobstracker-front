@@ -64,9 +64,6 @@ export default function Home() {
             );
 
             console.log("Respuesta del servidor:", response.data);
-
-            // Guarda el token en localStorage
-            localStorage.setItem("token", response.data.token);
             
         } catch (error: unknown) {
             if (error instanceof Error) {

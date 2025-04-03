@@ -102,7 +102,7 @@ export default function Home() {
                     <DialogTrigger asChild>
                         <Button variant="outline">Crear nuevo</Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
+                    <DialogContent className="sm:max-w-md" aria-describedby={undefined}>
                         <DialogHeader>
                             <DialogTitle>Titulo del trabajo</DialogTitle>
                         </DialogHeader>
@@ -112,7 +112,6 @@ export default function Home() {
                                 Titulo
                                 </Label>
                                 <Input
-                                defaultValue="Titulo" 
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}      
                                 />
@@ -127,7 +126,6 @@ export default function Home() {
                                 Descripcion
                                 </Label>
                                 <Input
-                                defaultValue="Descripcion"
                                 value={desc}
                                 onChange={(e) => setDesc(e.target.value)}        
                                 />

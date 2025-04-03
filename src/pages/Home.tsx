@@ -63,7 +63,7 @@ export default function Home() {
         e.preventDefault();
         const token = localStorage.getItem("token");
         try{
-            const response = await axios.post("http://localhost:8000/api/job/add", 
+            const response = await axios.post("http://localhost:8000/api/jobs", 
                 { name: name, status: status, desc: desc}, 
                 {
                     headers: {
@@ -157,7 +157,7 @@ export default function Home() {
                 <div className="p-4 px-10 flex flex-col items-center w-1/3">
                     <h2 className="text-xl mb-6">Sin respuesta</h2>
                     {posts.map((post) =>(
-                        <div key={post._id.$oid}>
+                        <div key={post._id.$oid} className="w-full">
                             {post.status === "enviado" &&
                                 <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
                             }
@@ -167,7 +167,7 @@ export default function Home() {
                 <div className="p-4 px-10 flex flex-col items-center w-1/3">
                     <h2 className="text-xl mb-6">Con respuesta</h2>
                     {posts.map((post) =>(
-                        <div key={post._id.$oid}>
+                        <div key={post._id.$oid} className="w-full">
                             {post.status === "respondido" &&
                                 <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
                             }
@@ -177,7 +177,7 @@ export default function Home() {
                 <div className="p-4 px-10 flex flex-col items-center w-1/3">
                     <h2 className="text-xl mb-6">Rechazados</h2>
                     {posts.map((post) =>(
-                        <div key={post._id.$oid}>
+                        <div key={post._id.$oid} className="w-full">
                             {post.status === "rechazado" &&
                                 <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
                             }

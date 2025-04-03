@@ -13,6 +13,8 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { useNavigate } from "react-router-dom";
+
 
 export default function Home() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -21,6 +23,8 @@ export default function Home() {
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
     const [status, setStatus] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (theme === "dark") {
@@ -50,6 +54,11 @@ export default function Home() {
         getPosts();
     }, []);
 
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
         const token = localStorage.getItem("token");
@@ -78,9 +87,14 @@ export default function Home() {
         <div>
             <div className="p-6 mb-2 flex justify-between">
                 <h1 className="text-3xl">Trabajos</h1>
-                <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                    {theme === "dark" ? "☀️" : "🌙"}
-                </Button>
+                <div>
+                    <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="mx-4">
+                        {theme === "dark" ? "☀️" : "🌙"}
+                    </Button>
+                    <Button onClick={() => handleLogout()}>
+                        Logout
+                    </Button>
+                </div>
             </div>
             <div className="flex justify-end p-4 px-6">
                 <Dialog>
@@ -140,7 +154,7 @@ export default function Home() {
                 </Dialog>
             </div>
             <div className="flex justify-between px-8">
-                <div className="p-4 px-10 flex flex-col items-center max-w-1/3">
+                <div className="p-4 px-10 flex flex-col items-center w-1/3">
                     <h2 className="text-xl mb-6">Sin respuesta</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid}>
@@ -150,7 +164,7 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <div className="p-4 px-10 flex flex-col items-center max-w-1/3">
+                <div className="p-4 px-10 flex flex-col items-center w-1/3">
                     <h2 className="text-xl mb-6">Con respuesta</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid}>
@@ -160,7 +174,7 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <div className="p-4 px-10 flex flex-col items-center max-w-1/3">
+                <div className="p-4 px-10 flex flex-col items-center w-1/3">
                     <h2 className="text-xl mb-6">Rechazados</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid}>

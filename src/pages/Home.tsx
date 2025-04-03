@@ -20,6 +20,7 @@ export default function Home() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [posts, setPosts] = useState<Post[]>([]);
     const [updateTrigger, setUpdateTrigger] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
@@ -46,7 +47,6 @@ export default function Home() {
                     },
                 });
                 setPosts(response.data);
-                console.log(response.data)
             } catch (error) {
                 console.error("Error fetching jobs:", error);
             }
@@ -72,9 +72,9 @@ export default function Home() {
                     },
                }
             );
-
             console.log("Respuesta del servidor:", response.data);
             setUpdateTrigger(true)
+            setOpen(false)
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error("Error en el login:", error.message);
@@ -98,7 +98,7 @@ export default function Home() {
                 </div>
             </div>
             <div className="flex justify-end p-4 px-6">
-                <Dialog>
+                <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
                         <Button variant="outline">Crear nuevo</Button>
                     </DialogTrigger>

@@ -151,6 +151,20 @@ export default function Home() {
                     </div>
                 ))}
             </div>
+            <div className="p-4 px-10">
+                {posts.map((post) =>(
+                    <div key={post._id.$oid}>
+                        <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                    </div>
+                ))}
+            </div>
+            <div className="p-4 px-10">
+                {posts.map((post) =>(
+                    <div key={post._id.$oid}>
+                        <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

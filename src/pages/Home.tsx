@@ -18,6 +18,10 @@ export default function Home() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [posts, setPosts] = useState<Post[]>([]);
 
+    const [name, setName] = useState('');
+    const [desc, setDesc] = useState('');
+    const [status, setStatus] = useState('');
+
     useEffect(() => {
         if (theme === "dark") {
           document.documentElement.classList.add("dark");
@@ -46,6 +50,33 @@ export default function Home() {
         getPosts();
     }, []);
 
+    const handleSubmit = async(e: React.FormEvent) => {
+        e.preventDefault();
+        const token = localStorage.getItem("token");
+        try{
+            const response = await axios.post("http://localhost:8000/api/job/add", 
+                { name: name, status: status, desc: desc}, 
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+               }
+            );
+
+            console.log("Respuesta del servidor:", response.data);
+
+            // Guarda el token en localStorage
+            localStorage.setItem("token", response.data.token);
+            
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error("Error en el login:", error.message);
+            } else {
+                console.error("Error desconocido:", error);
+            }
+        }
+    }
+
     return(    
         <div>
             <div className="p-6 mb-2 flex justify-between">
@@ -69,7 +100,9 @@ export default function Home() {
                                 Titulo
                                 </Label>
                                 <Input
-                                defaultValue="Titulo"        
+                                defaultValue="Titulo" 
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}      
                                 />
                             </div>
                         </div>
@@ -82,13 +115,15 @@ export default function Home() {
                                 Descripcion
                                 </Label>
                                 <Input
-                                defaultValue="Descripcion"        
+                                defaultValue="Descripcion"
+                                value={desc}
+                                onChange={(e) => setDesc(e.target.value)}        
                                 />
                             </div>
                         </div>
                         <Label htmlFor="framework">Estado</Label>
-                        <Select>
-                            <SelectTrigger id="framework">
+                        <Select onValueChange={setStatus}>
+                            <SelectTrigger id="framework" className="w-full">
                             <SelectValue placeholder="Select" />
                             </SelectTrigger>
                             <SelectContent position="popper">
@@ -99,7 +134,7 @@ export default function Home() {
                         </Select>
                         <DialogFooter className="sm:justify-start">
                             <DialogClose asChild>
-                                <Button type="button" variant="create">
+                                <Button type="button" variant="create" onClick={handleSubmit}>
                                 Crear
                                 </Button>
                             </DialogClose>

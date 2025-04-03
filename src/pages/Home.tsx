@@ -154,8 +154,8 @@ export default function Home() {
                     </DialogContent>
                 </Dialog>
             </div>
-            <div className="flex justify-between px-8">
-                <div className="p-4 px-10 flex flex-col items-center w-1/3">
+            <div className="flex justify-between px-8 lg:flex-row flex-col">
+                <div className="p-4 px-10 flex flex-col items-center lg:w-1/3">
                     <h2 className="text-xl mb-6">Sin respuesta</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
@@ -165,7 +165,7 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <div className="p-4 px-10 flex flex-col items-center w-1/3">
+                <div className="p-4 px-10 flex flex-col items-center lg:w-1/3">
                     <h2 className="text-xl mb-6">Con respuesta</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
@@ -175,7 +175,7 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <div className="p-4 px-10 flex flex-col items-center w-1/3">
+                <div className="p-4 px-10 flex flex-col items-center lg:w-1/3">
                     <h2 className="text-xl mb-6">Rechazados</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">

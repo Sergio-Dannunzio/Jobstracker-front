@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 export default function Home() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [posts, setPosts] = useState<Post[]>([]);
+    const [updateTrigger, setUpdateTrigger] = useState(false);
 
     const [name, setName] = useState('');
     const [desc, setDesc] = useState('');
@@ -52,7 +53,7 @@ export default function Home() {
         };
 
         getPosts();
-    }, []);
+    }, [updateTrigger]);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -73,7 +74,7 @@ export default function Home() {
             );
 
             console.log("Respuesta del servidor:", response.data);
-            
+            setUpdateTrigger(true)
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.error("Error en el login:", error.message);

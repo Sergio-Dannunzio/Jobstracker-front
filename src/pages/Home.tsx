@@ -140,30 +140,36 @@ export default function Home() {
                 </Dialog>
             </div>
             <div className="flex justify-between px-8">
-                <h2 className="text-xl">Sin respuesta</h2>
-                <h2 className="text-xl">Con respuesta</h2>
-                <h2 className="text-xl">Rechazados</h2>
-            </div>
-            <div className="p-4 px-10">
-                {posts.map((post) =>(
-                    <div key={post._id.$oid}>
-                        <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
-                    </div>
-                ))}
-            </div>
-            <div className="p-4 px-10">
-                {posts.map((post) =>(
-                    <div key={post._id.$oid}>
-                        <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
-                    </div>
-                ))}
-            </div>
-            <div className="p-4 px-10">
-                {posts.map((post) =>(
-                    <div key={post._id.$oid}>
-                        <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
-                    </div>
-                ))}
+                <div className="p-4 px-10 flex flex-col items-center max-w-1/3">
+                    <h2 className="text-xl mb-6">Sin respuesta</h2>
+                    {posts.map((post) =>(
+                        <div key={post._id.$oid}>
+                            {post.status === "enviado" &&
+                                <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                            }
+                        </div>
+                    ))}
+                </div>
+                <div className="p-4 px-10 flex flex-col items-center max-w-1/3">
+                    <h2 className="text-xl mb-6">Con respuesta</h2>
+                    {posts.map((post) =>(
+                        <div key={post._id.$oid}>
+                            {post.status === "respondido" &&
+                                <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                            }
+                        </div>
+                    ))}
+                </div>
+                <div className="p-4 px-10 flex flex-col items-center max-w-1/3">
+                    <h2 className="text-xl mb-6">Rechazados</h2>
+                    {posts.map((post) =>(
+                        <div key={post._id.$oid}>
+                            {post.status === "rechazado" &&
+                                <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                            }
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     )

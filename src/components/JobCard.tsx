@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 
 const JobCard: React.FC<Job> = ({ name, status, desc }) => {
     return(
-        <Card>
+        <Card className="my-1">
             <CardHeader>
                 <CardTitle className="flex justify-between">
                     {name}

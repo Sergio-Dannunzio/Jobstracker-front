@@ -155,8 +155,8 @@ export default function Home() {
                 </Dialog>
             </div>
             <div className="flex justify-between px-8 lg:flex-row flex-col">
-                <div className="p-4 px-10 flex flex-col items-center lg:w-1/3">
-                    <h2 className="text-xl mb-6">Sin respuesta</h2>
+                <div className="p-4 flex flex-col items-center lg:w-1/3">
+                    <h2 className="text-xl mb-2">Sin respuesta</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "enviado" &&
@@ -165,8 +165,8 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <div className="p-4 px-10 flex flex-col items-center lg:w-1/3">
-                    <h2 className="text-xl mb-6">Con respuesta</h2>
+                <div className="p-4 flex flex-col items-center lg:w-1/3">
+                    <h2 className="text-xl mb-2">Con respuesta</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "respondido" &&
@@ -175,8 +175,8 @@ export default function Home() {
                         </div>
                     ))}
                 </div>
-                <div className="p-4 px-10 flex flex-col items-center lg:w-1/3">
-                    <h2 className="text-xl mb-6">Rechazados</h2>
+                <div className="p-4 flex flex-col items-center lg:w-1/3">
+                    <h2 className="text-xl mb-2">Rechazados</h2>
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "rechazado" &&

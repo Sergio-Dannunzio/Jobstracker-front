@@ -37,7 +37,7 @@ const JobCard: React.FC<Job> = ({ name, status, desc }) => {
 
                     <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>
-                        <Button variant={"destructive"}><FaTrash /></Button>
+                        <Button className="bg-destructive hover:bg-destructive/70"><FaTrash /></Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-lg" aria-describedby={undefined}>
                         <DialogHeader>
@@ -46,7 +46,7 @@ const JobCard: React.FC<Job> = ({ name, status, desc }) => {
                         </DialogHeader>
                         <DialogFooter className="sm:justify-start w-full px-8">
                             <DialogClose asChild>
-                                <Button type="button" variant="destructive" className="w-1/2">
+                                <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70">
                                     Eliminar
                                 </Button>
                             </DialogClose>

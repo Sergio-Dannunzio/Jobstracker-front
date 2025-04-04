@@ -5,9 +5,34 @@ import { Button } from "./ui/button";
 import { FaTrash } from "react-icons/fa";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { useState } from "react";
+import axios from "axios";
 
-const JobCard: React.FC<Job> = ({ name, status, desc }) => {
+const JobCard: React.FC<Job> = ({ name, status, desc, id }) => {
         const [open, setOpen] = useState(false);
+
+        const handleDelete = async(e: React.FormEvent) => {
+            e.preventDefault();
+            const token = localStorage.getItem("token");
+            console.log(id)
+            try{
+                const response = await axios.delete("http://localhost:8000/api/jobs/" + {id}, 
+                   {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                   }
+                );
+                console.log("Respuesta del servidor:", response.data);
+                //setUpdateTrigger(true)
+                setOpen(false)
+            } catch (error: unknown) {
+                if (error instanceof Error) {
+                    console.error("Error en el login:", error.message);
+                } else {
+                    console.error("Error desconocido:", error);
+                }
+            }
+        }
         
     return(
         <Card className="my-1">
@@ -46,7 +71,7 @@ const JobCard: React.FC<Job> = ({ name, status, desc }) => {
                         </DialogHeader>
                         <DialogFooter className="sm:justify-start w-full px-8">
                             <DialogClose asChild>
-                                <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70">
+                                <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70" onClick={handleDelete}>
                                     Eliminar
                                 </Button>
                             </DialogClose>

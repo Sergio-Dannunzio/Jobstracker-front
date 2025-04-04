@@ -158,7 +158,7 @@ export default function Home() {
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "enviado" &&
-                                <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid}></JobCard>
                             }
                         </div>
                     ))}
@@ -168,7 +168,7 @@ export default function Home() {
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "respondido" &&
-                                <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid}></JobCard>
                             }
                         </div>
                     ))}
@@ -178,7 +178,7 @@ export default function Home() {
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "rechazado" &&
-                                <JobCard name={post.name} status={post.status} desc={post.desc}></JobCard>
+                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid}></JobCard>
                             }
                         </div>
                     ))}

@@ -15,7 +15,7 @@ const JobCard: React.FC<Job> = ({ name, status, desc, id }) => {
             const token = localStorage.getItem("token");
             console.log(id)
             try{
-                const response = await axios.delete("http://localhost:8000/api/jobs/" + {id}, 
+                const response = await axios.delete(`http://localhost:8000/api/jobs/${id}`, 
                    {
                         headers: {
                             Authorization: `Bearer ${token}`,

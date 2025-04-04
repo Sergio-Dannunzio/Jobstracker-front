@@ -144,7 +144,7 @@ export default function Home() {
                         </Select>
                         <DialogFooter className="sm:justify-start">
                             <DialogClose asChild>
-                                <Button type="button" variant="create" onClick={handleSubmit}>
+                                <Button type="button" onClick={handleSubmit} className="bg-green-400 hover:bg-green-400/70">
                                 Crear
                                 </Button>
                             </DialogClose>

@@ -7,6 +7,9 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { useState } from "react";
 import { deleteJob } from "@/services/JobService";
 import { MdModeEdit } from "react-icons/md";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 
 interface JobCardProps extends Job {
     onDeleted: () => void;
@@ -14,6 +17,13 @@ interface JobCardProps extends Job {
 
 const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) => {
         const [open, setOpen] = useState(false);
+        const [openEdit, setOpenEdit] = useState(false);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const [newName, setName] = useState('');
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const [newDesc, setDesc] = useState('');
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const [bewStatus, setStatus] = useState('');
 
         const handleDelete = async(e: React.FormEvent) => {
             e.preventDefault();
@@ -52,19 +62,54 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                         <p className="flex items-center ml-4">2 <span className="ml-1 text-[#313131]"><FaComment></FaComment></span></p>
                     </div>
                     <div className="">
-                        <Dialog open={open} onOpenChange={setOpen}>
+                        <Dialog open={openEdit} onOpenChange={setOpenEdit}>
                             <DialogTrigger asChild className="m-2">
                                 <Button className=" hover:bg-accent-foreground/70 dark:hover:bg-accent/50 dark:bg-accent dark:text-accent-foreground "><MdModeEdit /></Button>
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-lg" aria-describedby={undefined}>
-                                <DialogHeader>
-                                    <DialogTitle>¿Realmente desea eliminar el siguiente trabajo?</DialogTitle>
-                                    <DialogDescription></DialogDescription>
-                                </DialogHeader>
+                            <DialogHeader>
+                            <DialogTitle>Titulo del trabajo</DialogTitle>
+                            </DialogHeader>
+                            <div className="flex items-center space-x-2">
+                                <div className="grid flex-1 gap-2">
+                                    <Label htmlFor="link" className="sr-only">
+                                    Titulo
+                                    </Label>
+                                    <Input
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}      
+                                    />
+                                </div>
+                            </div>
+                            <DialogHeader>
+                                <DialogTitle>Descripcion</DialogTitle>
+                            </DialogHeader>
+                            <div className="flex items-center space-x-2">
+                                <div className="grid flex-1 gap-2">
+                                    <Label htmlFor="link" className="sr-only">
+                                    Descripcion
+                                    </Label>
+                                    <Input
+                                    value={desc}
+                                    onChange={(e) => setDesc(e.target.value)}        
+                                    />
+                                </div>
+                            </div>
+                            <Label htmlFor="framework">Estado</Label>
+                            <Select onValueChange={setStatus}>
+                                <SelectTrigger id="framework" className="w-full">
+                                <SelectValue placeholder="Select" />
+                                </SelectTrigger>
+                                <SelectContent position="popper">
+                                <SelectItem value="enviado">Enviado</SelectItem>
+                                <SelectItem value="respondido">Respondido</SelectItem>
+                                <SelectItem value="rechazado">Rechazado</SelectItem>
+                                </SelectContent>
+                            </Select>
                                 <DialogFooter className="sm:justify-start w-full px-8">
                                     <DialogClose asChild>
-                                        <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70" onClick={handleDelete}>
-                                            Eliminar
+                                        <Button type="button"  className="w-1/2 bg-green-400 hover:bg-green-400/70" onClick={handleDelete}>
+                                            Editar
                                         </Button>
                                     </DialogClose>
                                     <DialogClose asChild>

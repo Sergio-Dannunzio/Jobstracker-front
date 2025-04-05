@@ -6,6 +6,7 @@ import { FaTrash } from "react-icons/fa";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { useState } from "react";
 import { deleteJob } from "@/services/JobService";
+import { MdModeEdit } from "react-icons/md";
 
 interface JobCardProps extends Job {
     onDeleted: () => void;
@@ -50,30 +51,54 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                         <p>02/11</p>
                         <p className="flex items-center ml-4">2 <span className="ml-1 text-[#313131]"><FaComment></FaComment></span></p>
                     </div>
-
-                    <Dialog open={open} onOpenChange={setOpen}>
-                    <DialogTrigger asChild>
-                        <Button className="bg-destructive hover:bg-destructive/70"><FaTrash /></Button>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-lg" aria-describedby={undefined}>
-                        <DialogHeader>
-                            <DialogTitle>¿Realmente desea eliminar el siguiente trabajo?</DialogTitle>
-                            <DialogDescription></DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter className="sm:justify-start w-full px-8">
-                            <DialogClose asChild>
-                                <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70" onClick={handleDelete}>
-                                    Eliminar
-                                </Button>
-                            </DialogClose>
-                            <DialogClose asChild>
-                                <Button type="button" className="w-1/2">
-                                    Cancelar
-                                </Button>
-                            </DialogClose>
-                        </DialogFooter>
-                    </DialogContent>
-                </Dialog>
+                    <div className="">
+                        <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild className="m-2">
+                                <Button className=" hover:bg-accent-foreground/70 dark:hover:bg-accent/50 dark:bg-accent dark:text-accent-foreground "><MdModeEdit /></Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-lg" aria-describedby={undefined}>
+                                <DialogHeader>
+                                    <DialogTitle>¿Realmente desea eliminar el siguiente trabajo?</DialogTitle>
+                                    <DialogDescription></DialogDescription>
+                                </DialogHeader>
+                                <DialogFooter className="sm:justify-start w-full px-8">
+                                    <DialogClose asChild>
+                                        <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70" onClick={handleDelete}>
+                                            Eliminar
+                                        </Button>
+                                    </DialogClose>
+                                    <DialogClose asChild>
+                                        <Button type="button" className="w-1/2">
+                                            Cancelar
+                                        </Button>
+                                    </DialogClose>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                        <Dialog open={open} onOpenChange={setOpen}>
+                            <DialogTrigger asChild>
+                                <Button className="bg-destructive hover:bg-destructive/70"><FaTrash /></Button>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-lg" aria-describedby={undefined}>
+                                <DialogHeader>
+                                    <DialogTitle>¿Realmente desea eliminar el siguiente trabajo?</DialogTitle>
+                                    <DialogDescription></DialogDescription>
+                                </DialogHeader>
+                                <DialogFooter className="sm:justify-start w-full px-8">
+                                    <DialogClose asChild>
+                                        <Button type="button"  className="w-1/2 bg-destructive hover:bg-destructive/70" onClick={handleDelete}>
+                                            Eliminar
+                                        </Button>
+                                    </DialogClose>
+                                    <DialogClose asChild>
+                                        <Button type="button" className="w-1/2">
+                                            Cancelar
+                                        </Button>
+                                    </DialogClose>
+                                </DialogFooter>
+                            </DialogContent>
+                        </Dialog>
+                    </div>
                 </div>
             </CardFooter>
         </Card>

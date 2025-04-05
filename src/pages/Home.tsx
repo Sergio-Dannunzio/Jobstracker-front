@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
-import axios from "axios";
 import { Post } from "../types/Post";
 import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogHeader, DialogFooter, DialogClose } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -14,7 +13,7 @@ import {
     SelectValue,
   } from "@/components/ui/select"
 import { useNavigate } from "react-router-dom";
-import { getJobs } from "@/services/JobService";
+import { addJob, getJobs } from "@/services/JobService";
 
 
 export default function Home() {
@@ -56,24 +55,12 @@ export default function Home() {
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
         const token = localStorage.getItem("token");
-        try{
-            const response = await axios.post("http://localhost:8000/api/jobs", 
-                { name: name, status: status, desc: desc}, 
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-               }
-            );
-            console.log("Respuesta del servidor:", response.data);
+        try {
+            await addJob({ name, status, desc }, token || "");
             getPosts();
-            setOpen(false)
-        } catch (error: unknown) {
-            if (error instanceof Error) {
-                console.error("Error en el login:", error.message);
-            } else {
-                console.error("Error desconocido:", error);
-            }
+            setOpen(false);
+        } catch (err) {
+            console.error("Error deleting job", err);
         }
     }
 

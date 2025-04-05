@@ -5,32 +5,23 @@ import { Button } from "./ui/button";
 import { FaTrash } from "react-icons/fa";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { useState } from "react";
-import axios from "axios";
+import { deleteJob } from "@/services/JobService";
 
-const JobCard: React.FC<Job> = ({ name, status, desc, id }) => {
+interface JobCardProps extends Job {
+    onDeleted: () => void;
+}
+
+const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) => {
         const [open, setOpen] = useState(false);
 
         const handleDelete = async(e: React.FormEvent) => {
             e.preventDefault();
-            const token = localStorage.getItem("token");
-            console.log(id)
-            try{
-                const response = await axios.delete(`http://localhost:8000/api/jobs/${id}`, 
-                   {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        },
-                   }
-                );
-                console.log("Respuesta del servidor:", response.data);
-                //setUpdateTrigger(true)
-                setOpen(false)
-            } catch (error: unknown) {
-                if (error instanceof Error) {
-                    console.error("Error en el login:", error.message);
-                } else {
-                    console.error("Error desconocido:", error);
-                }
+            const token = localStorage.getItem("token") || "";
+            try {
+                await deleteJob(id, token);
+                onDeleted(); // Recargar la lista (ej: llamar getJobs de nuevo desde el padre)
+            } catch (err) {
+                console.error("Error deleting job", err);
             }
         }
         
@@ -90,3 +81,4 @@ const JobCard: React.FC<Job> = ({ name, status, desc, id }) => {
 }
 
 export default JobCard;
+

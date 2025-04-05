@@ -14,12 +14,13 @@ import {
     SelectValue,
   } from "@/components/ui/select"
 import { useNavigate } from "react-router-dom";
+import { getJobs } from "@/services/JobService";
 
 
 export default function Home() {
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [posts, setPosts] = useState<Post[]>([]);
-    const [updateTrigger, setUpdateTrigger] = useState(false);
+    //const [updateTrigger, setUpdateTrigger] = useState(false);
     const [open, setOpen] = useState(false);
 
     const [name, setName] = useState('');
@@ -37,23 +38,15 @@ export default function Home() {
         localStorage.setItem("theme", theme);
       }, [theme]);
 
-    useEffect(() => {
-        const getPosts = async () => {
-            const token = localStorage.getItem("token");
-            try {
-                const response = await axios.get("http://localhost:8000/api/jobs", {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
-                setPosts(response.data);
-            } catch (error) {
-                console.error("Error fetching jobs:", error);
-            }
-        };
+      const getPosts = async () => {
+        const token = localStorage.getItem("token") || "";
+        const data = await getJobs(token);
+        setPosts(data);
+    };
 
+    useEffect(() => {
         getPosts();
-    }, [updateTrigger]);
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -73,7 +66,7 @@ export default function Home() {
                }
             );
             console.log("Respuesta del servidor:", response.data);
-            setUpdateTrigger(true)
+            //setUpdateTrigger(true)
             setOpen(false)
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -158,7 +151,7 @@ export default function Home() {
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "enviado" &&
-                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid}></JobCard>
+                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid} onDeleted={getPosts}></JobCard>
                             }
                         </div>
                     ))}
@@ -168,7 +161,7 @@ export default function Home() {
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "respondido" &&
-                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid}></JobCard>
+                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid} onDeleted={getPosts}></JobCard>
                             }
                         </div>
                     ))}
@@ -178,7 +171,7 @@ export default function Home() {
                     {posts.map((post) =>(
                         <div key={post._id.$oid} className="w-full">
                             {post.status === "rechazado" &&
-                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid}></JobCard>
+                                <JobCard name={post.name} status={post.status} desc={post.desc} id={post._id.$oid} onDeleted={getPosts}></JobCard>
                             }
                         </div>
                     ))}

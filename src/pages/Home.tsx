@@ -66,7 +66,7 @@ export default function Home() {
                }
             );
             console.log("Respuesta del servidor:", response.data);
-            //setUpdateTrigger(true)
+            getPosts();
             setOpen(false)
         } catch (error: unknown) {
             if (error instanceof Error) {

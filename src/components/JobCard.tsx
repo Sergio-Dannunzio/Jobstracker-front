@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { FaTrash } from "react-icons/fa";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { useState } from "react";
-import { deleteJob } from "@/services/JobService";
+import { deleteJob, updateJob } from "@/services/JobService";
 import { MdModeEdit } from "react-icons/md";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -18,12 +18,10 @@ interface JobCardProps extends Job {
 const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) => {
         const [open, setOpen] = useState(false);
         const [openEdit, setOpenEdit] = useState(false);
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
         const [newName, setName] = useState('');
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [newDesc, setDesc] = useState('');
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [bewStatus, setStatus] = useState('');
+        const [newStatus, setStatus] = useState('');
 
         const handleDelete = async(e: React.FormEvent) => {
             e.preventDefault();
@@ -31,6 +29,18 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
             try {
                 await deleteJob(id, token);
                 onDeleted(); // Recargar la lista (ej: llamar getJobs de nuevo desde el padre)
+            } catch (err) {
+                console.error("Error deleting job", err);
+            }
+        }
+
+        const handleUpdate = async(e: React.FormEvent) => {
+            e.preventDefault();
+            const token = localStorage.getItem("token") || "";
+            try {
+                await updateJob({id, name: newName, status: newStatus, desc: newDesc}, token);
+                onDeleted();
+                setOpenEdit(false)
             } catch (err) {
                 console.error("Error deleting job", err);
             }
@@ -76,7 +86,7 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                                     Titulo
                                     </Label>
                                     <Input
-                                    value={name}
+                                    value={newName}
                                     onChange={(e) => setName(e.target.value)}      
                                     />
                                 </div>
@@ -90,7 +100,7 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                                     Descripcion
                                     </Label>
                                     <Input
-                                    value={desc}
+                                    value={newDesc}
                                     onChange={(e) => setDesc(e.target.value)}        
                                     />
                                 </div>
@@ -108,7 +118,7 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                             </Select>
                                 <DialogFooter className="sm:justify-start w-full px-8">
                                     <DialogClose asChild>
-                                        <Button type="button"  className="w-1/2 bg-green-400 hover:bg-green-400/70" onClick={handleDelete}>
+                                        <Button type="button"  className="w-1/2 bg-green-400 hover:bg-green-400/70" onClick={handleUpdate}>
                                             Editar
                                         </Button>
                                     </DialogClose>

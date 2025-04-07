@@ -22,3 +22,10 @@ export const addJob = async (jobData: { name: string; status: string; desc: stri
     });
     return response.data;
 };
+
+export const updateJob = async (jobData: {id: string, name: string; status: string; desc: string }, token: string) => {
+    const response = await axios.put(`${API_URL}/${jobData.id}`, jobData,{
+        headers: { Authorization: `Bearer ${token}`},
+    });
+    return response.data;
+}

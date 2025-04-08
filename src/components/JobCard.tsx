@@ -69,7 +69,7 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                 <div className="flex justify-between w-full items-center">
                     <div className="flex">
                         <p>02/11</p>
-                        <p className="flex items-center ml-4">2 <span className="ml-1 text-[#313131]"><FaComment></FaComment></span></p>
+                        <button className="flex items-center ml-4 cursor-pointer">2 <span className="ml-1 text-[#313131]"><FaComment></FaComment></span></button>
                     </div>
                     <div className="">
                         <Dialog open={openEdit} onOpenChange={setOpenEdit}>

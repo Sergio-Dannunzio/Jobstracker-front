@@ -67,7 +67,7 @@ export default function Home() {
     return(    
         <div>
             <div className="p-6 mb-2 flex justify-between">
-                <h1 className="text-3xl">Trabajos</h1>
+                <h1 className="text-3xl px-2">Trabajos</h1>
                 <div>
                     <Button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="mx-4">
                         {theme === "dark" ? "☀️" : "🌙"}

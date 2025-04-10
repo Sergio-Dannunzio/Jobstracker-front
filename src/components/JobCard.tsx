@@ -10,6 +10,7 @@ import { MdModeEdit } from "react-icons/md";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import DialogComments from "./DialogComments";
 
 interface JobCardProps extends Job {
     onDeleted: () => void;
@@ -18,6 +19,7 @@ interface JobCardProps extends Job {
 const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) => {
         const [open, setOpen] = useState(false);
         const [openEdit, setOpenEdit] = useState(false);
+        const [openComments, setOpenComments] = useState(false);
 
         const [newName, setName] = useState('');
         const [newDesc, setDesc] = useState('');
@@ -69,7 +71,8 @@ const JobCard: React.FC<JobCardProps> = ({ name, status, desc, id, onDeleted }) 
                 <div className="flex justify-between w-full items-center">
                     <div className="flex">
                         <p>02/11</p>
-                        <button className="flex items-center ml-4 cursor-pointer">2 <span className="ml-1 text-[#313131]"><FaComment></FaComment></span></button>
+                        <button className="flex items-center ml-4 cursor-pointer" onClick={() => setOpenComments(true)}>2 <span className="ml-1 text-[#313131]"><FaComment></FaComment></span></button>
+                        <DialogComments open={openComments} onOpenChange={setOpenComments} />
                     </div>
                     <div className="">
                         <Dialog open={openEdit} onOpenChange={setOpenEdit}>

@@ -22,7 +22,11 @@ import {
             <DialogDescription>Este es un diálogo de prueba.</DialogDescription>
             <DialogDescription>{id}</DialogDescription>
           </DialogHeader>
-          {/* Contenido adicional */}
+          <div className="flex items-center space-x-2">
+            <div className="grid flex-1 gap-2">
+              <DialogDescription>Descripcion</DialogDescription>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     );
